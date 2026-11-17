@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>51吃瓜黑料github-资源索引与核验方法</title>
+<meta name="description" content="51吃瓜黑料github是一个整理开源吃瓜资料仓库的索引页，说明仓库命名规律、star与fork数据怎么看、issue争议如何分辨事实与转述，并提供核验步骤、常见问题与条目评论，帮助读者判断页面可信度。">
+<meta name="keywords" content="51吃瓜黑料github">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161a22'/%3E%3Ccircle cx='24' cy='26' r='9' fill='%23ff5a5f'/%3E%3Ccircle cx='42' cy='26' r='9' fill='%23ffb020'/%3E%3Ccircle cx='33' cy='42' r='9' fill='%2338d39a'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f4ef;
+  --surface:#ffffff;
+  --surface-2:#efece4;
+  --ink:#1b1d22;
+  --ink-soft:#4a4f5a;
+  --ink-mute:#767b86;
+  --line:#dcd7cb;
+  --brand:#c8352c;
+  --brand-dark:#96261f;
+  --accent:#1f6f6b;
+  --accent-soft:#e2efed;
+  --gold:#b07a15;
+  --gold-soft:#f6ecd8;
+  --radius-s:6px;
+  --radius-m:12px;
+  --radius-l:20px;
+  --shadow-1:0 1px 2px rgba(27,29,34,.06),0 4px 14px rgba(27,29,34,.05);
+  --shadow-2:0 2px 6px rgba(27,29,34,.08),0 14px 34px rgba(27,29,34,.09);
+  --fs-h1:clamp(1.85rem,4.4vw,3.05rem);
+  --fs-h2:clamp(1.3rem,2.4vw,1.62rem);
+  --fs-h3:1.06rem;
+  --fs-body:1rem;
+  --fs-s:0.875rem;
+  --fs-xs:0.78rem;
+  --space-1:6px;
+  --space-2:12px;
+  --space-3:18px;
+  --space-4:26px;
+  --space-5:38px;
+  --space-6:56px;
+  --sticky-h:104px;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+body{
+  margin:0;
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.72;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;line-height:1.3;font-weight:700}
+p{margin:0 0 var(--space-2)}
+ul,ol{margin:0 0 var(--space-2);padding-left:1.25em}
+li{margin-bottom:4px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:200}
+.skip-link:focus{left:8px;top:8px}
+
+/* ---------- sticky stack ---------- */
+.sticky-stack{position:sticky;top:0;z-index:120}
+.notice-bar{
+  background:#161a22;
+  color:#e9e6de;
+  font-size:var(--fs-s);
+  border-bottom:1px solid #2a2f3a;
+}
+.notice-bar .wrap{display:flex;gap:14px;align-items:center;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.notice-tag{
+  background:var(--brand);color:#fff;font-size:var(--fs-xs);
+  padding:2px 8px;border-radius:999px;letter-spacing:.04em;flex:0 0 auto;
+}
+.notice-bar strong{color:#fff;font-weight:600}
+.notice-bar a{color:#ffd9a6;text-decoration:none;border-bottom:1px dotted #ffd9a6}
+
+.site-header{
+  background:rgba(246,244,239,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-row{display:flex;align-items:center;gap:18px;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto;color:var(--ink);text-decoration:none}
+.brand:hover{text-decoration:none}
+.brand-mark{width:38px;height:38px;flex:0 0 auto}
+.brand-text{font-weight:800;font-size:1.02rem;letter-spacing:.01em;line-height:1.2}
+.brand-text em{display:block;font-style:normal;font-size:var(--fs-xs);color:var(--ink-mute);font-weight:500;letter-spacing:.08em}
+.main-nav{margin-left:auto;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.main-nav a{
+  display:inline-block;padding:7px 10px;border-radius:var(--radius-s);
+  font-size:var(--fs-s);color:var(--ink-soft);text-decoration:none;border:1px solid transparent;
+}
+.main-nav a:hover{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.main-nav a:focus-visible,.menu-btn:focus-visible,a:focus-visible,button:focus-visible{
+  outline:3px solid var(--accent);outline-offset:2px;border-radius:var(--radius-s);
+}
+.search-box{display:flex;align-items:center;gap:0;flex:0 1 250px;min-width:0}
+.search-box input{
+  width:100%;min-width:0;padding:8px 10px;font-size:var(--fs-s);font-family:inherit;
+  border:1px solid var(--line);border-right:none;border-radius:var(--radius-s) 0 0 var(--radius-s);
+  background:var(--surface);color:var(--ink);
+}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.search-box button{
+  padding:8px 14px;font-size:var(--fs-s);font-family:inherit;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  border-radius:0 var(--radius-s) var(--radius-s) 0;
+}
+.search-box button:hover{background:var(--gold-soft)}
+.menu-btn{
+  display:none;margin-left:auto;padding:8px 12px;font-size:var(--fs-s);font-family:inherit;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-s);
+  cursor:pointer;color:var(--ink);align-items:center;gap:6px;
+}
+.menu-btn .bars{display:inline-flex;flex-direction:column;gap:3px}
+.menu-btn .bars i{display:block;width:15px;height:2px;background:var(--ink)}
+.search-status{font-size:var(--fs-xs);color:var(--brand-dark);padding:0 20px 8px;display:none}
+.search-status.on{display:block}
+.no-result{display:none;margin:10px 0 0;padding:10px 14px;border-left:3px solid var(--brand);background:var(--surface);font-size:var(--fs-s);color:var(--ink-soft)}
+.no-result.on{display:block}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:linear-gradient(160deg,#f6f4ef 0%,#efece4 58%,#e7e3d8 100%)}
+.hero .wrap{padding-top:var(--space-5);padding-bottom:var(--space-5)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:var(--space-5);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-xs);letter-spacing:.16em;color:var(--brand-dark);font-weight:700;margin-bottom:14px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--brand)}
+.hero h1{font-size:var(--fs-h1);letter-spacing:-.01em;margin-bottom:14px}
+.hero h1 span{color:var(--brand)}
+.hero-desc{font-size:1.04rem;color:var(--ink-soft);max-width:33em;margin-bottom:var(--space-3)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:var(--space-4)}
+.chip{
+  display:inline-block;font-size:var(--fs-xs);padding:4px 10px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);
+}
+.chip.warn{background:var(--gold-soft);border-color:#e3cf9f;color:#6d4c0a}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--radius-s);
+  font-size:var(--fs-s);font-weight:600;text-decoration:none;border:1px solid transparent;
+  transition:transform .15s ease,background .15s ease;
+}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow-1)}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink-mute)}
+.btn-ghost:hover{background:var(--surface)}
+.hero-figure{position:relative;min-height:280px;display:flex;align-items:center;justify-content:center}
+.hero-svg{width:100%;height:auto;filter:drop-shadow(0 18px 30px rgba(27,29,34,.13))}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:var(--space-4);max-width:520px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:12px 14px;box-shadow:var(--shadow-1)}
+.stat b{display:block;font-size:1.3rem;line-height:1.2;color:var(--brand-dark)}
+.stat small{font-size:var(--fs-xs);color:var(--ink-mute);letter-spacing:.02em}
+
+/* ---------- layout ---------- */
+.page-main{padding:var(--space-5) 0 var(--space-6)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:var(--space-5);align-items:start}
+.content-col{min-width:0}
+.side-col{position:sticky;top:calc(var(--sticky-h) + 14px);min-width:0}
+section.block{margin-bottom:var(--space-6);scroll-margin-top:calc(var(--sticky-h) + 12px)}
+.block-head{margin-bottom:var(--space-3)}
+.block-head .kicker{font-size:var(--fs-xs);letter-spacing:.14em;color:var(--gold);font-weight:700}
+.block-head h2{font-size:var(--fs-h2);margin:6px 0 8px}
+.block-head p{color:var(--ink-soft);font-size:.96rem;max-width:52em}
+.section-note{font-size:var(--fs-s);color:var(--ink-mute);border-left:2px solid var(--line);padding-left:10px}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);box-shadow:var(--shadow-1)}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.feature-card{padding:18px;display:flex;flex-direction:column;gap:10px;transition:transform .15s ease,box-shadow .15s ease}
+.feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2)}
+.feature-card h3{font-size:var(--fs-h3)}
+.feature-card p{font-size:var(--fs-s);color:var(--ink-soft);margin:0}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:var(--fs-xs);background:var(--surface-2);color:var(--ink-soft);padding:2px 8px;border-radius:4px}
+.metric-line{display:flex;gap:14px;font-size:var(--fs-xs);color:var(--ink-mute);border-top:1px dashed var(--line);padding-top:8px;margin-top:auto}
+.metric-line b{color:var(--ink);font-weight:700}
+
+/* compact list */
+.list-rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.row-item{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:13px 2px;border-bottom:1px solid var(--line)}
+.row-item time{font-size:var(--fs-xs);color:var(--ink-mute);font-variant-numeric:tabular-nums}
+.row-item .row-title{font-size:.96rem;font-weight:600;color:var(--ink)}
+.row-item .row-title a{color:inherit}
+.row-item p{font-size:var(--fs-s);color:var(--ink-soft);margin:3px 0 0}
+.row-item .badge{font-size:var(--fs-xs);white-space:nowrap;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:4px}
+
+/* channels */
+.channel-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.channel-item{
+  display:block;padding:12px 12px;border:1px solid var(--line);border-radius:var(--radius-s);
+  background:var(--surface);color:var(--ink);font-size:var(--fs-s);font-weight:600;
+  transition:border-color .15s ease,background .15s ease;
+}
+.channel-item small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--ink-mute);margin-top:2px}
+.channel-item:hover{background:var(--gold-soft);border-color:#d9c393;text-decoration:none}
+
+/* deep read */
+.deep-read{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(18px,3vw,34px);box-shadow:var(--shadow-1)}
+.deep-read h3{font-size:1.14rem;margin:var(--space-4) 0 10px;padding-left:12px;border-left:4px solid var(--brand)}
+.deep-read h3:first-of-type{margin-top:6px}
+.deep-read p{color:#2c3038}
+.deep-read .verdict{
+  background:var(--accent-soft);border:1px solid #bcd9d6;border-radius:var(--radius-m);
+  padding:16px 18px;margin:0 0 var(--space-3);
+}
+.deep-read .verdict strong{color:var(--accent);display:block;font-size:var(--fs-xs);letter-spacing:.12em;margin-bottom:6px}
+.quote-card{background:var(--surface-2);border-left:4px solid var(--gold);padding:14px 16px;border-radius:0 var(--radius-s) var(--radius-s) 0;font-size:.95rem;color:var(--ink-soft);margin:var(--space-3) 0}
+.check-table{width:100%;border-collapse:collapse;font-size:var(--fs-s);margin:12px 0 4px}
+.check-table caption{caption-side:top;text-align:left;font-size:var(--fs-xs);color:var(--ink-mute);padding-bottom:6px}
+.check-table th,.check-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.check-table th{background:var(--surface-2);font-weight:600;white-space:nowrap}
+.check-table td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* steps */
+.steps{counter-reset:s;display:grid;gap:12px}
+.step{
+  counter-increment:s;position:relative;padding:14px 16px 14px 58px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius-m);
+}
+.step::before{
+  content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;
+  display:grid;place-items:center;border-radius:50%;background:var(--brand);color:#fff;
+  font-size:var(--fs-s);font-weight:700;
+}
+.step h3{font-size:1rem;margin-bottom:4px}
+.step p{font-size:var(--fs-s);color:var(--ink-soft);margin:0}
+
+/* compare panel */
+.compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;background:var(--surface)}
+.compare>div{padding:16px 18px}
+.compare>div+div{border-left:1px solid var(--line)}
+.compare h3{font-size:.98rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.compare .ok h3{color:var(--accent)}
+.compare .no h3{color:var(--brand-dark)}
+.compare ul{font-size:var(--fs-s);color:var(--ink-soft);padding-left:1.1em}
+
+/* faq */
+details.faq{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:0;margin-bottom:10px;overflow:hidden}
+details.faq summary{
+  cursor:pointer;list-style:none;padding:14px 44px 14px 16px;position:relative;
+  font-weight:600;font-size:.98rem;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{
+  content:"+";position:absolute;right:16px;top:12px;font-size:1.2rem;color:var(--ink-mute);font-weight:400;
+}
+details.faq[open] summary::after{content:"–"}
+details.faq summary:hover{background:var(--surface-2)}
+details.faq .faq-body{padding:0 16px 16px;font-size:var(--fs-s);color:var(--ink-soft)}
+details.faq .faq-body p:last-child{margin-bottom:0}
+
+/* comments */
+.comment{border:1px solid var(--line);border-radius:var(--radius-m);background:var(--surface);padding:14px 16px;margin-bottom:12px}
+.comment-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;font-size:var(--fs-xs);color:var(--ink-mute)}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-size:var(--fs-xs);font-weight:700;color:var(--ink-soft);flex:0 0 auto}
+.comment-head b{font-size:var(--fs-s);color:var(--ink)}
+.comment p{font-size:var(--fs-s);color:var(--ink-soft);margin:0 0 6px}
+.comment p:last-child{margin-bottom:0}
+.comment .ref{font-size:var(--fs-xs);color:var(--brand-dark);background:#f8e6e3;padding:1px 6px;border-radius:3px}
+.tone-neutral{border-left:3px solid var(--ink-mute)}
+.tone-crit{border-left:3px solid var(--brand)}
+.tone-praise{border-left:3px solid var(--accent)}
+
+/* timeline */
+.timeline{position:relative;padding-left:26px;margin:0;list-style:none}
+.timeline::before{content:"";position:absolute;left:7px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.timeline li{position:relative;padding-bottom:16px}
+.timeline li::before{
+  content:"";position:absolute;left:-24px;top:7px;width:10px;height:10px;border-radius:50%;
+  background:var(--brand);border:2px solid var(--bg);box-shadow:0 0 0 1px var(--brand);
+}
+.timeline time{font-size:var(--fs-xs);color:var(--ink-mute);display:block;font-variant-numeric:tabular-nums}
+.timeline b{font-size:.94rem}
+.timeline p{font-size:var(--fs-s);color:var(--ink-soft);margin:2px 0 0}
+
+/* rank board */
+.rank-list{counter-reset:r;display:grid;gap:8px}
+.rank-list li{list-style:none;counter-increment:r;display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-s);margin:0}
+.rank-list li::before{
+  content:counter(r);font-weight:800;color:var(--ink-mute);font-size:1rem;text-align:center;
+}
+.rank-list li:nth-child(-n+3)::before{color:var(--brand)}
+.rank-list .rk-name{font-size:var(--fs-s);font-weight:600}
+.rank-list .rk-sub{font-size:var(--fs-xs);color:var(--ink-mute);font-weight:400;display:block}
+.rank-list .rk-val{font-size:var(--fs-xs);color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* image cards */
+.news-card{overflow:hidden;display:flex;flex-direction:column}
+.news-card img{width:100%;height:150px;object-fit:cover}
+.news-card .body{padding:14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.news-card h3{font-size:.98rem}
+.news-card p{font-size:var(--fs-s);color:var(--ink-soft);margin:0}
+.news-card .meta{font-size:var(--fs-xs);color:var(--ink-mute);margin-top:auto}
+
+/* recommend tags */
+.rec-tags{display:flex;flex-wrap:wrap;gap:9px}
+.rec-tags a{
+  display:inline-block;padding:7px 13px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);font-size:var(--fs-s);color:var(--ink-soft);
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.rec-tags a:hover{background:var(--accent-soft);border-color:#b7d6d3;color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+
+/* sidebar */
+.side-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:16px;margin-bottom:16px;box-shadow:var(--shadow-1)}
+.side-card h2{font-size:.95rem;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.side-nav{position:sticky;top:calc(var(--sticky-h) + 14px)}
+.side-nav ul{list-style:none;margin:0;padding:0;font-size:var(--fs-s)}
+.side-nav li{margin:0}
+.side-nav a{
+  display:block;padding:7px 10px;border-left:3px solid transparent;color:var(--ink-soft);
+  border-radius:0 var(--radius-s) var(--radius-s) 0;transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.side-nav a:hover{background:var(--surface-2);color:var(--ink);text-decoration:none}
+.side-nav a.active{border-left-color:var(--brand);background:#f8e6e3;color:var(--brand-dark);font-weight:600}
+.side-facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:var(--fs-s)}
+.side-facts dt{color:var(--ink-mute);font-size:var(--fs-xs)}
+.side-facts dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.side-facts p{font-size:var(--fs-xs);color:var(--ink-mute);margin:10px 0 0}
+
+/* footer */
+.site-footer{background:#161a22;color:#c9c6bf;padding:var(--space-5) 0 0;font-size:var(--fs-s)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--space-4);padding-bottom:var(--space-4)}
+.site-footer h2{font-size:var(--fs-s);color:#fff;margin-bottom:10px;letter-spacing:.06em}
+.site-footer p{color:#9c99a3;margin:0 0 8px}
+.site-footer ul{list-style:none;padding:0;margin:0}
+.site-footer li{margin-bottom:6px}
+.site-footer a{color:#c9c6bf;text-decoration:none;border-bottom:1px solid transparent}
+.site-footer a:hover{color:#fff;border-bottom-color:#5c5f6a;text-decoration:none}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:#fff;font-weight:800}
+.footer-bottom{border-top:1px solid #2a2f3a;padding:14px 0 20px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;font-size:var(--fs-xs);color:#83808b}
+.footer-note{font-size:var(--fs-xs);color:#83808b;background:#1d222b;border:1px solid #2f3542;border-radius:var(--radius-s);padding:10px 12px;margin-top:12px;line-height:1.6}
+
+/* back to top */
+.to-top{
+  position:fixed;right:18px;bottom:22px;z-index:150;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;
+  display:grid;place-items:center;box-shadow:var(--shadow-2);opacity:0;visibility:hidden;
+  transition:opacity .2s ease,visibility .2s ease,transform .15s ease;
+}
+.to-top.show{opacity:1;visibility:visible}
+.to-top:hover{transform:translateY(-3px);background:var(--gold-soft)}
+.to-top:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* responsive */
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .side-col{position:static;order:2}
+  .content-col{order:1}
+  .side-nav{position:static}
+  .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .channel-index{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-figure{order:-1;min-height:190px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .main-nav{display:none}
+  .main-nav.open{
+    display:flex;flex-direction:column;align-items:stretch;position:absolute;left:0;right:0;
+    top:100%;background:var(--surface);border-bottom:1px solid var(--line);
+    padding:10px 20px 16px;box-shadow:var(--shadow-2);gap:2px;
+  }
+  .main-nav.open a{padding:10px 8px;border-radius:var(--radius-s)}
+  .menu-btn{display:inline-flex}
+  .search-box{flex:1 1 auto}
+  .site-header{position:relative}
+  .sticky-stack{position:static}
+  .side-col,.section.block,section.block{scroll-margin-top:12px}
+}
+@media (max-width:680px){
+  .header-row{flex-wrap:wrap;gap:10px}
+  .search-box{order:5;flex:1 1 100%}
+  .grid-3,.grid-2,.channel-index{grid-template-columns:minmax(0,1fr)}
+  .compare{grid-template-columns:minmax(0,1fr)}
+  .compare>div+div{border-left:none;border-top:1px solid var(--line)}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .row-item{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+  .row-item time{grid-column:1/-1;order:-1}
+  .footer-grid{grid-template-columns:1fr}
+  .deep-read{padding:16px}
+  .check-table th,.check-table td{padding:6px 8px;font-size:var(--fs-xs)}
+  .to-top{right:12px;bottom:14px;width:38px;height:38px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<div class="sticky-stack">
+  <div class="notice-bar" role="region" aria-label="更新公告">
+    <div class="wrap">
+      <span class="notice-tag">更新</span>
+      <span><strong>11月6日</strong>新增仓库核验清单：fork 比与 issue 关闭率对照表 v2，覆盖 14 个公开索引仓库。</span>
+      <a href="#update-log">查看本周变动</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="header-row">
+        <a class="brand" href="/#top" aria-label="51吃瓜黑料github 首页">
+          <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#161a22"/>
+            <circle cx="24" cy="25" r="9" fill="#ff5a5f"/>
+            <circle cx="42" cy="25" r="9" fill="#ffb020"/>
+            <circle cx="33" cy="42" r="9" fill="#38d39a"/>
+            <path d="M24 25h18M33 34v8" stroke="#161a22" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-text">51吃瓜黑料github<em>仓库索引 · 核验方法</em></span>
+        </a>
+
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">
+          <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>频道
+        </button>
+
+        <nav class="main-nav" id="mainNav" aria-label="主题频道">
+          <a href="/#overview">仓库概览</a>
+          <a href="/#picks">精选索引</a>
+          <a href="/#channels">分类入口</a>
+          <a href="/#deep-read">深度解析</a>
+          <a href="/#guide">核验步骤</a>
+          <a href="/#faq">常见问题</a>
+          <a href="/#comments">条目评论</a>
+        </nav>
+
+        <form class="search-box" id="searchForm" role="search" aria-label="站内查找">
+          <input type="search" id="searchInput" placeholder="搜仓库名或条目" aria-label="输入关键词查找板块" autocomplete="off">
+          <button type="submit">查找</button>
+        </form>
+      </div>
+      <div class="search-status" id="searchStatus" role="status" aria-live="polite"></div>
+    </div>
+  </header>
+</div>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">开源仓库索引 · 第 47 期</span>
+          <h1 id="heroTitle">51吃瓜黑料github</h1>
+          <p class="hero-desc">把散落在 GitHub 上的爆料类仓库整理成一张可核对的索引表：看提交节奏、issue 处理记录、fork 与 star 的比例，判断一个仓库到底是持续维护的资料库，还是搬运一次就停更的存档。</p>
+          <div class="hero-meta">
+            <span class="chip">收录仓库 168 个</span>
+            <span class="chip">核验清单 9 项</span>
+            <span class="chip warn">标注过期 23 个</span>
+            <span class="chip">本周更新 6 条</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/#picks">看本期精选索引</a>
+            <a class="btn btn-ghost" href="/#guide">先学 5 步核验</a>
+          </div>
+          <div class="hero-stats" aria-label="索引数据概况">
+            <div class="stat"><b>168</b><small>收录仓库总数</small></div>
+            <div class="stat"><b>41</b><small>近 30 天有提交</small></div>
+            <div class="stat"><b>57%</b><small>issue 关闭率中位数</small></div>
+          </div>
+        </div>
+        <div class="hero-figure" aria-hidden="true">
+          <svg class="hero-svg" viewBox="0 0 460 340" role="img">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffffff"/>
+                <stop offset="1" stop-color="#e9e4d8"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#c8352c"/>
+                <stop offset="1" stop-color="#96261f"/>
+              </linearGradient>
+            </defs>
+            <rect x="14" y="26" width="432" height="288" rx="20" fill="url(#g1)" stroke="#dcd7cb"/>
+            <rect x="40" y="54" width="160" height="12" rx="6" fill="#cfc9bb"/>
+            <rect x="40" y="78" width="104" height="10" rx="5" fill="#ded9cd"/>
+            <g>
+              <rect x="40" y="112" width="116" height="82" rx="10" fill="#161a22"/>
+              <circle cx="66" cy="138" r="8" fill="#ff5a5f"/>
+              <circle cx="90" cy="138" r="8" fill="#ffb020"/>
+              <circle cx="114" cy="138" r="8" fill="#38d39a"/>
+              <rect x="52" y="158" width="92" height="7" rx="3.5" fill="#3a404c"/>
+              <rect x="52" y="172" width="64" height="7" rx="3.5" fill="#2c313b"/>
+            </g>
+            <g>
+              <rect x="172" y="112" width="248" height="24" rx="6" fill="#ffffff" stroke="#ded9cd"/>
+              <rect x="186" y="121" width="120" height="6" rx="3" fill="#c8352c"/>
+              <rect x="186" y="148" width="216" height="10" rx="5" fill="#e4dfd3"/>
+              <rect x="186" y="168" width="176" height="10" rx="5" fill="#e9e4d8"/>
+              <rect x="186" y="188" width="196" height="10" rx="5" fill="#e9e4d8"/>
+            </g>
+            <g>
+              <rect x="40" y="218" width="380" height="1" fill="#ded9cd"/>
+              <rect x="40" y="238" width="88" height="52" rx="8" fill="#e2efed" stroke="#bcd9d6"/>
+              <rect x="140" y="238" width="88" height="52" rx="8" fill="#f6ecd8" stroke="#e3cf9f"/>
+              <rect x="240" y="238" width="88" height="52" rx="8" fill="#f8e6e3" stroke="#e8c3be"/>
+              <rect x="340" y="238" width="80" height="52" rx="8" fill="#efece4" stroke="#dcd7cb"/>
+              <rect x="52" y="252" width="46" height="7" rx="3.5" fill="#1f6f6b"/>
+              <rect x="152" y="252" width="46" height="7" rx="3.5" fill="#b07a15"/>
+              <rect x="252" y="252" width="46" height="7" rx="3.5" fill="#c8352c"/>
+              <rect x="352" y="252" width="40" height="7" rx="3.5" fill="#767b86"/>
+              <rect x="52" y="268" width="64" height="6" rx="3" fill="#a9b7b5"/>
+              <rect x="152" y="268" width="64" height="6" rx="3" fill="#cfbd97"/>
+              <rect x="252" y="268" width="64" height="6" rx="3" fill="#d9b3ad"/>
+              <rect x="352" y="268" width="56" height="6" rx="3" fill="#c6c2b7"/>
+            </g>
+            <circle cx="388" cy="66" r="22" fill="url(#g2)"/>
+            <path d="M380 66l6 7 12-14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-main">
+    <div class="wrap">
+      <div class="layout">
+        <div class="content-col">
+
+          <!-- 1. 领域概览 -->
+          <section class="block" id="overview" aria-labelledby="ovT">
+            <div class="block-head">
+              <span class="kicker">领域概览</span>
+              <h2 id="ovT">这类 GitHub 仓库到底在存什么</h2>
+              <p>爆料仓库的内容结构比标题重要。常见三种形态：按日期归档的单文件、按人物或事件拆分的目录、以及用 issue 当作讨论区的「半仓库半论坛」。索引时先分清形态，再判断维护成本。</p>
+            </div>
+            <div class="grid-3">
+              <article class="card feature-card">
+                <span class="tag">归档型</span>
+                <h3>按日期归档的单文件仓库</h3>
+                <p>README 全量堆叠，每次更新都是追加一段。优点是抓取简单；缺点是超过 3000 行后，搜索定位几乎只能靠 GitHub 的代码搜索。</p>
+                <div class="metric-line"><span>样本 <b>62</b> 个</span><span>近 30 天提交 <b>11</b> 个</span></div>
+              </article>
+              <article class="card feature-card">
+                <span class="tag">目录型</span>
+                <h3>按事件拆目录的索引仓库</h3>
+                <p>每个事件一个文件夹，附时间线与来源链接。维护者通常两三人，靠 Pull Request 补充。翻目录比翻单文件快，但目录命名随意时同样难找。</p>
+                <div class="metric-line"><span>样本 <b>54</b> 个</span><span>近 30 天提交 <b>22</b> 个</span></div>
+              </article>
+              <article class="card feature-card">
+                <span class="tag">讨论型</span>
+                <h3>用 issue 当讨论区的仓库</h3>
+                <p>主体内容很少，信息集中在 issue 评论区。判断价值要看关闭率与平均回复时长，光看 star 会把热闹误当可靠。</p>
+                <div class="metric-line"><span>样本 <b>52</b> 个</span><span>issue 关闭率中位数 <b>44%</b></span></div>
+              </article>
+            </div>
+            <p class="section-note" style="margin-top:14px">统计口径：2026 年 10 月 9 日至 11 月 7 日抓取的公开仓库页面，共 168 个，剔除空仓库与纯 fork。</p>
+          </section>
+
+          <!-- 2. 精选内容推荐 -->
+          <section class="block" id="picks" aria-labelledby="pkT">
+            <div class="block-head">
+              <span class="kicker">精选内容推荐</span>
+              <h2 id="pkT">本期值得先看的 6 个条目</h2>
+              <p>挑选标准写死在筛选规则里：近 14 天有提交、issue 关闭率高于 55%、README 至少标注 3 个可点来源。三条任一不满足就不进本栏。</p>
+            </div>
+            <div class="grid-2">
+              <article class="card feature-card">
+                <h3>吃瓜仓库来源标注规范对照</h3>
+                <p>把 9 个仓库的「来源」写法摊开对比：有的只写平台名，有的贴出原帖链接与截图时间。后者更容易回查，前者在删帖后基本失效。</p>
+                <div class="tag-row"><span class="tag">来源标注</span><span class="tag">可回查</span></div>
+                <div class="metric-line"><span><b>9</b> 个样本</span><span>更新 <b>11月5日</b></span></div>
+              </article>
+              <article class="card feature-card">
+                <h3>黑料索引仓库 star 与 fork 比例表</h3>
+                <p>fork 数明显高于 star 的仓库，多半被当作备份分叉；star 高而 fork 低，常见于只读型归档。比例本身不是质量分，但能提示仓库的用途。</p>
+                <div class="tag-row"><span class="tag">star/fork</span><span class="tag">用途判断</span></div>
+                <div class="metric-line"><span><b>44</b> 个仓库</span><span>更新 <b>11月4日</b></span></div>
+              </article>
+              <article class="card feature-card">
+                <h3>issue 里的事实、回应与转述怎么分栏</h3>
+                <p>同一件事在 issue 里常出现三种叙述：当事人原文、第三方转述、以及「听说」。把三类分开记，回看时才知道哪条能引用。</p>
+                <div class="tag-row"><span class="tag">issue 辨伪</span><span class="tag">叙述层级</span></div>
+                <div class="metric-line"><span><b>17</b> 条讨论</span><span>更新 <b>11月3日</b></span></div>
+              </article>
+              <article class="card feature-card">
+                <h3>停更仓库识别：最后一次提交的三条线索</h3>
+                <p>最后提交时间之外，再看 README 里的「更新至」字样是否与提交日期一致，以及 releases 页是否空置。三者不一致的仓库，多半已经半放弃。</p>
+                <div class="tag-row"><span class="tag">停更识别</span><span class="tag">提交时间</span></div>
+                <div class="metric-line"><span><b>23</b> 个过期</span><span>更新 <b>11月2日</b></span></div>
+              </article>
+              <article class="card feature-card">
+                <h3>README 目录树写法优劣对比</h3>
+                <p>用手写 Markdown 列表还是自动生成 toc，直接影响长文档能不能跳转。42 个样本里，只有 15 个提供了可用的页内锚点。</p>
+                <div class="tag-row"><span class="tag">README 结构</span><span class="tag">锚点</span></div>
+                <div class="metric-line"><span><b>42</b> 个样本</span><span>更新 <b>11月1日</b></span></div>
+              </article>
+              <article class="card feature-card">
+                <h3>搬运仓库与原创整理仓库的区分方法</h3>
+                <p>搬运型通常提交信息只有「update」，原创整理型会写清补了哪条、来源是哪个账号。提交信息是最省力的鉴别入口。</p>
+                <div class="tag-row"><span class="tag">搬运鉴别</span><span class="tag">提交信息</span></div>
+                <div class="metric-line"><span><b>31</b> 个样本</span><span>更新 <b>10月31日</b></span></div>
+              </article>
+            </div>
+          </section>
+
+          <!-- 3. 最新更新 -->
+          <section class="block" id="update-log" aria-labelledby="upT">
+            <div class="block-head">
+              <span class="kicker">最新更新</span>
+              <h2 id="upT">本周索引变动记录</h2>
+              <p>只记可核对的动作：收录、下线、状态改判。每条带仓库名与日期，方便对回原页面。</p>
+            </div>
+            <div class="list-rows">
+              <div class="row-item">
+                <time datetime="2026-11-06">11月6日</time>
+                <div>
+                  <div class="row-title"><a href="/#deep-read">核验清单 v2 上线，覆盖 14 个公开索引仓库</a></div>
+                  <p>新增 fork 比与 issue 关闭率的交叉判定，替换原来只看 star 的单一标准。</p>
+                </div>
+                <span class="badge">清单</span>
+              </div>
+              <div class="row-item">
+                <time datetime="2026-11-05">11月5日</time>
+                <div>
+                  <div class="row-title">仓库「guachive-2025」标记为过期</div>
+                  <p>最后提交停在 9 月 12 日，README 仍写着「持续更新」，状态由「活跃」改判「过期」。</p>
+                </div>
+                <span class="badge">改判</span>
+              </div>
+              <div class="row-item">
+                <time datetime="2026-11-04">11月4日</time>
+                <div>
+                  <div class="row-title"><a href="/#picks">新增 3 个目录型仓库进入精选索引</a></div>
+                  <p>共同点：事件目录带日期前缀，来源列附原帖链接，最近 10 天均有提交。</p>
+                </div>
+                <span class="badge">收录</span>
+              </div>
+              <div class="row-item">
+                <time datetime="2026-11-02">11月2日</time>
+                <div>
+                  <div class="row-title">下线 2 个空仓库与 1 个纯 fork 镜像</div>
+                  <p>内容与原仓库完全一致且无额外整理，按收录规则剔除。</p>
+                </div>
+                <span class="badge">下线</span>
+              </div>
+              <div class="row-item">
+                <time datetime="2026-10-30">10月30日</time>
+                <div>
+                  <div class="row-title">评论栏新增「指向具体条目」校验</div>
+                  <p>无法对应到索引条目的评论转入待核验区，不再直接展示。</p>
+                </div>
+                <span class="badge">规则</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. 分类入口 -->
+          <section class="block" id="channels" aria-labelledby="chT">
+            <div class="block-head">
+              <span class="kicker">分类入口</span>
+              <h2 id="chT">按用途切分的 9 个频道</h2>
+              <p>名称取自检索时最常用的说法，不按仓库自命名分组。同一仓库可能同时出现在两个频道，标注以哪个为主。</p>
+            </div>
+            <div class="channel-index">
+              <a class="channel-item" href="/#picks">吃瓜仓库来源标注<small>9 个条目</small></a>
+              <a class="channel-item" href="/#picks">黑料索引仓库<small>37 个条目</small></a>
+              <a class="channel-item" href="/#deep-read">issue 讨论区核验<small>17 条讨论</small></a>
+              <a class="channel-item" href="/#update-log">停更仓库识别<small>23 个过期</small></a>
+              <a class="channel-item" href="/#guide">fork 备份型仓库<small>21 个条目</small></a>
+              <a class="channel-item" href="/#picks">README 目录结构<small>42 个样本</small></a>
+              <a class="channel-item" href="/#deep-read">搬运与原创鉴别<small>31 个样本</small></a>
+              <a class="channel-item" href="/#rank">star 增长异常榜<small>10 个条目</small></a>
+              <a class="channel-item" href="/#comments">条目用户评论<small>本周 12 条</small></a>
+            </div>
+          </section>
+
+          <!-- 5. 深度解析 -->
+          <section class="block" id="deep-read" aria-labelledby="drT">
+            <div class="block-head">
+              <span class="kicker">深度解析</span>
+              <h2 id="drT">star 数不能当可信度用，但 fork 比可以部分替代</h2>
+            </div>
+            <div class="deep-read">
+              <div class="verdict">
+                <strong>核心判断</strong>
+                <p style="margin:0">对爆料类仓库，<b>fork/star 比低于 0.12</b> 且近 30 天无提交的，可信度应下调一档；<b>高于 0.35</b> 的，要先确认它是不是备份镜像，而不是默认更可靠。这个区间来自 111 个可读到完整计数的仓库样本，不是行业标准。</p>
+              </div>
+
+              <h3>样本与口径：111 个仓库里只有 44 个的数据可用</h3>
+              <p>抓取时间 2026 年 10 月 25 日至 11 月 5 日，逐页读 star、fork、issue 三个计数。111 个仓库里，有 67 个 issue 区被作者关闭或清空，无法算关闭率，于是 fork/star 比成了少数还能横向比的数据。计数本身有滞后：star 从点击到页面更新通常在一分钟内，fork 更快，可作为同一时点的比值参考。</p>
+              <table class="check-table">
+                <caption>fork/star 比区间与对应仓库形态（n=111）</caption>
+                <thead>
+                  <tr><th>区间</th><th>仓库数</th><th>常见形态</th><th>近 30 天有提交</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="num">&lt; 0.12</td><td class="num">46</td><td>只读归档、个人备份</td><td class="num">9</td></tr>
+                  <tr><td class="num">0.12 – 0.35</td><td class="num">39</td><td>持续整理的目录型</td><td class="num">24</td></tr>
+                  <tr><td class="num">&gt; 0.35</td><td class="num">26</td><td>被大量分叉的模板或镜像</td><td class="num">8</td></tr>
+                </tbody>
+              </table>
+              <p>0.12 以下这一档里，只有 9 个仓库近 30 天有提交，比例 19.6%；中间档是 61.5%。差距足够明显，也解释了为什么单看 star 会误判：一个 800 star、fork 40 的归档仓库，star 很高，但活跃度接近零。</p>
+
+              <h3>反例：仓库「ml-archive-09」的 fork 比 0.41，但不可信</h3>
+              <p>该仓库 10 月 18 日被 126 次 fork，同期 star 仅 307。读 fork 列表能看到多数分叉来自同一天、同一个模板脚本，提交历史只有一次「初始化」。也就是说，高 fork 比在这里反映的是传播动作，不是维护强度。把它当作「很多人认可」的证据，会得出相反结论。</p>
+              <div class="quote-card">可核对动作：打开仓库页 → 点 fork 数字 → 按时间排序 → 若单日 fork 超过总数一半且分叉仓库无独立提交，判为传播型而非维护型。</div>
+
+              <h3>issue 关闭率要和回复时长一起看</h3>
+              <p>关闭率高不等于认真处理。样本中关闭率 80% 以上的 7 个仓库，有 4 个平均回复时长超过 6 天，其中 2 个是作者批量关闭「重复」标签。反过来说，关闭率 40% 左右但平均 12 小时内首复的仓库，讨论质量往往更好。判断顺序应当是：先看首复时长，再看关闭率，最后看关闭理由是否写了具体依据。</p>
+              <p>一个具体对照：10 月 22 日，仓库 A 有 14 个 open issue，作者在 3 天内回复了 11 个，其中 6 个附了原帖链接；仓库 B 在同期关闭了 19 个 issue，关闭评论统一为「已处理」，没有附任何链接。前者关闭率低，但可回查信息更多。</p>
+
+              <h3>说法差异：维护者与 issue 参与者对「已核实」的定义不同</h3>
+              <p>10 月 28 日，一个目录型仓库的维护者在 README 写「本仓库内容均已核实」，issue 里随即有人指出其中 4 条只标注了平台名、没有原帖链接。维护者的回应是「平台内可搜到即为核实」，参与者认为需要给出账号与时间戳。这是定义分歧，不是事实分歧，但会直接影响引用者对该仓库的信任程度。索引页把这个仓库的来源完整度从「高」调为「中」。</p>
+              <p>这里需要区分三层：事实是「4 条缺原帖链接」，可逐条核对；回应是维护者的定义说明，属转述其立场；推测是「他可能没时间逐条补」，无证据，不入索引结论。</p>
+            </div>
+          </section>
+
+          <!-- 6. 体验指南 -->
+          <section class="block" id="guide" aria-labelledby="gdT">
+            <div class="block-head">
+              <span class="kicker">体验指南</span>
+              <h2 id="gdT">5 步读完一个仓库再决定要不要收藏</h2>
+              <p>顺序有讲究：先看整体形态，再看证据密度，最后才看讨论区。倒过来容易被最热闹的 issue 带偏。</p>
+            </div>
+            <div class="steps">
+              <div class="step">
+                <h3>看 README 前 80 行</h3>
+                <p>这里通常写了收录范围、更新频率和免责声明。若 80 行内没有出现任何日期或来源说明，直接降级。</p>
+              </div>
+              <div class="step">
+                <h3>核对最后一次提交与 README 的「更新至」是否一致</h3>
+                <p>不一致超过 30 天，说明仓库已进入半维护状态；这类仓库的历史条目仍可看，新事件别指望。</p>
+              </div>
+              <div class="step">
+                <h3>抽 3 条内容回查来源</h3>
+                <p>优先抽最靠前和最靠后的条目。前者常是精挑的样板，后者更容易暴露维护质量下滑。</p>
+              </div>
+              <div class="step">
+                <h3>读 issue 的首复时长与关闭理由</h3>
+                <p>关闭理由写「重复」时，点进去看被指向的原 issue 是否真的覆盖同一事件。这一步常能发现批量关闭。</p>
+              </div>
+              <div class="step">
+                <h3>记录结论并写明依据</h3>
+                <p>用一句话写下判断加一条证据，例如「活跃：10月31日有提交，且 3 条内容均附原帖链接」。没有证据的结论不进个人清单。</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 7. 对照面板 -->
+          <section class="block" id="compare" aria-labelledby="cpT">
+            <div class="block-head">
+              <span class="kicker">可信度分层</span>
+              <h2 id="cpT">值得收藏与建议绕开的两类特征</h2>
+              <p>按可观察特征分组，不做价值评判。同一仓库随时间可能从右栏移到左栏，反之亦然。</p>
+            </div>
+            <div class="compare">
+              <div class="ok">
+                <h3>值得收藏的特征</h3>
+                <ul>
+                  <li>来源列附原帖链接与截图时间，删帖后仍能说明出处</li>
+                  <li>提交信息写明补了哪条，不是统一的「update」</li>
+                  <li>issue 首复在 24 小时内，关闭理由带具体指向</li>
+                  <li>README 有目录树，长文可跳转</li>
+                  <li>对争议内容标注「待核实」，不混入确定结论</li>
+                </ul>
+              </div>
+              <div class="no">
+                <h3>建议绕开的特征</h3>
+                <ul>
+                  <li>只写平台名、无账号与日期，无法回查</li>
+                  <li>README 声称持续更新，提交停在两个月前</li>
+                  <li>issue 被批量关闭，评论统一模板</li>
+                  <li>单日 fork 数超过总数一半，分叉仓库无独立提交</li>
+                  <li>把转述写成当事人原话，未标「据称」</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- 8. 榜单 -->
+          <section class="block" id="rank" aria-labelledby="rkT">
+            <div class="block-head">
+              <span class="kicker">补充板块 · 榜单</span>
+              <h2 id="rkT">近 30 天 star 增长异常榜</h2>
+              <p>「异常」指增长曲线在 48 小时内出现陡升，且同期 fork 未同步增长。榜单只提示需多看一眼，不表示内容有问题。</p>
+            </div>
+            <ol class="rank-list">
+              <li><div><span class="rk-name">guachive-2025</span><span class="rk-sub">48 小时内 +412 star，fork 仅 +9</span></div><span class="rk-val">已标记过期</span></li>
+              <li><div><span class="rk-name">heilian-index</span><span class="rk-sub">单日 +186 star，来自同一话题页导流</span></div><span class="rk-val">来源待补</span></li>
+              <li><div><span class="rk-name">tucao-archive</span><span class="rk-sub">3 天 +233 star，issue 区未同步增加</span></div><span class="rk-val">首复 5 天</span></li>
+              <li><div><span class="rk-name">daily-digest-cn</span><span class="rk-sub">增长平稳，但 README 与提交日期不一致</span></div><span class="rk-val">状态中</span></li>
+              <li><div><span class="rk-name">issue-only-board</span><span class="rk-sub">star 少、issue 多，关闭率 41%</span></div><span class="rk-val">讨论型</span></li>
+            </ol>
+          </section>
+
+          <!-- 9. 相关资讯 -->
+          <section class="block" id="news" aria-labelledby="nwT">
+            <div class="block-head">
+              <span class="kicker">相关资讯</span>
+              <h2 id="nwT">平台与仓库生态的三条动态</h2>
+              <p>只收与仓库可读性直接相关的变动，不转发内容本身。</p>
+            </div>
+            <div class="grid-3">
+              <article class="card news-card">
+                <img src="https://picsum.photos/seed/51guagithub-a/560/320" width="560" height="320" loading="lazy" alt="代码编辑器中打开的 Markdown 目录结构">
+                <div class="body">
+                  <h3>GitHub 代码搜索对长 README 的定位效率</h3>
+                  <p>11 月 1 日实测：3000 行以上的单文件 README，用仓库内搜索命中后仍需二次滚动定位，目录型仓库平均少两次操作。</p>
+                  <span class="meta">11月1日 · 索引组实测</span>
+                </div>
+              </article>
+              <article class="card news-card">
+                <img src="https://picsum.photos/seed/51guagithub-b/560/320" width="560" height="320" loading="lazy" alt="浏览器中显示的 issue 列表与筛选标签">
+                <div class="body">
+                  <h3>issue 模板被作者改为必填来源字段</h3>
+                  <p>10 月 27 日起，两个目录型仓库要求提交 issue 时填写原帖链接，否则自动关闭。首周关闭 31 条，其中 18 条补链后重开。</p>
+                  <span class="meta">10月27日 · 仓库规则</span>
+                </div>
+              </article>
+              <article class="card news-card">
+                <img src="https://picsum.photos/seed/51guagithub-c/560/320" width="560" height="320" loading="lazy" alt="笔记本屏幕上并排显示的仓库 star 与 fork 数字">
+                <div class="body">
+                  <h3>镜像分叉被原作者标注「非官方」</h3>
+                  <p>10 月 24 日，某高 fork 仓库作者在 README 顶部加粗声明：其他分叉不代表本仓库立场。此后两周 fork 增速下降约三成。</p>
+                  <span class="meta">10月24日 · README 变更</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- 10. FAQ -->
+          <section class="block" id="faq" aria-labelledby="fqT">
+            <div class="block-head">
+              <span class="kicker">常见问题</span>
+              <h2 id="fqT">关于仓库索引与核验的 6 个问题</h2>
+            </div>
+            <details class="faq">
+              <summary>爆料仓库的 star 数能说明可靠吗？</summary>
+              <div class="faq-body"><p>star 反映的是被看到和收藏的次数，和内容准确性的相关性很弱。样本里 46 个 fork/star 比低于 0.12 的仓库，star 中位数 214，但仅 9 个近 30 天有提交。判断可靠度更应看来源链接是否可回查、提交信息是否具体。</p></div>
+            </details>
+            <details class="faq">
+              <summary>黑料索引仓库里的「已核实」字样可信吗？</summary>
+              <div class="faq-body"><p>要先看仓库有没有写出核实的标准。10 月 28 日的例子中，维护者把「平台内可搜到」当作核实，这与「附原帖链接与时间戳」是两套标准。README 只写结论、不写标准的，按转述对待，不作事实引用。</p></div>
+            </details>
+            <details class="faq">
+              <summary>fork 数很高的仓库是不是更值得看？</summary>
+              <div class="faq-body"><p>不一定。fork 高可能是备份、镜像或模板复制的产物。仓库「ml-archive-09」单日被 fork 126 次，但分叉仓库没有独立提交，属于传播动作。把 fork 数和 star 数放在一起看比值，比单看任一数字更有区分度。</p></div>
+            </details>
+            <details class="faq">
+              <summary>停更仓库识别有哪些可核对的信号？</summary>
+              <div class="faq-body"><p>三个信号：最后一次提交日期、README 声称的更新日期、releases 页是否空置。11 月 5 日改判过期的「guachive-2025」，提交停在 9 月 12 日，README 却写持续更新，两者相差 55 天。</p></div>
+            </details>
+            <details class="faq">
+              <summary>issue 讨论区的内容和仓库正文哪个优先？</summary>
+              <div class="faq-body"><p>issue 常包含对正文的纠错与补充，优先级取决于它有没有给出证据。带原帖链接、带时间的纠错优先于正文；只有观点、没有出处的，作为讨论参考，不替代正文条目。</p></div>
+            </details>
+            <details class="faq">
+              <summary>搬运类仓库和原创整理仓库怎么快速分开？</summary>
+              <div class="faq-body"><p>看提交信息。搬运型多为单次「update」或「初始化」，原创整理型会写明补了哪条、来源是哪个账号。再抽 2 条内容搜索原文，若在其他仓库里几乎逐字出现，基本可判为搬运。</p></div>
+            </details>
+          </section>
+
+          <!-- 11. 用户评论 -->
+          <section class="block" id="comments" aria-labelledby="cmT">
+            <div class="block-head">
+              <span class="kicker">条目评论</span>
+              <h2 id="cmT">本周 12 条条目指向评论选登</h2>
+              <p>仅收能对应到具体仓库或条目的评论。观点不一，保留吐槽与中性判断。</p>
+            </div>
+            <div class="comment tone-neutral">
+              <div class="comment-head"><span class="avatar">林</span><b>林舟</b><time datetime="2026-11-07">11月7日</time><span class="ref">guachive-2025</span></div>
+              <p>这个仓库半年前还挺好用，目录清楚。现在 README 说持续更新，实际最后提交是 9 月 12 日，中间断了一个多月，新事件基本没进。</p>
+            </div>
+            <div class="comment tone-crit">
+              <div class="comment-head"><span class="avatar">阿</span><b>阿岚</b><time datetime="2026-11-06">11月6日</time><span class="ref">heilian-index</span></div>
+              <p>来源那栏只写「某平台」，连账号都没给。这种条目看着热闹，删帖以后完全没法回查。索引页把它来源完整度从高调到中，我觉得调得对。</p>
+            </div>
+            <div class="comment tone-praise">
+              <div class="comment-head"><span class="avatar">周</span><b>周叙</b><time datetime="2026-11-06">11月6日</time><span class="ref">tucao-archive</span></div>
+              <p>提交信息写得细，「补 10 月 18 日某账号原帖」这种格式很省事，翻历史就知道补了什么。比一堆 update 强太多。</p>
+            </div>
+            <div class="comment tone-neutral">
+              <div class="comment-head"><span class="avatar">陈</span><b>陈默</b><time datetime="2026-11-05">11月5日</time><span class="ref">issue-only-board</span></div>
+              <p>这个仓库正文几乎是空的，信息全在 issue 里。关闭率 41% 看着低，但首复多数在半天内，比那些批量关闭的高关闭率仓库好读。</p>
+            </div>
+            <div class="comment tone-crit">
+              <div class="comment-head"><span class="avatar">赵</span><b>赵一鸣</b><time datetime="2026-11-04">11月4日</time><span class="ref">ml-archive-09</span></div>
+              <p>fork 数高得离谱，点进去看分叉时间全挤在一天，分叉仓库也没独立提交。拿这个当「很多人认可」的依据，方向就错了。</p>
+            </div>
+            <div class="comment tone-praise">
+              <div class="comment-head"><span class="avatar">吴</span><b>吴桐</b><time datetime="2026-11-03">11月3日</time><span class="ref">daily-digest-cn</span></div>
+              <p>目录树做得好，长文可以直接跳到事件段。虽然更新频率一般，但找旧条目省时间，这点比 star 数实在。</p>
+            </div>
+          </section>
+
+          <!-- 12. 相关推荐 -->
+          <section class="block" id="related" aria-labelledby="rlT">
+            <div class="block-head">
+              <span class="kicker">相关推荐</span>
+              <h2 id="rlT">继续查这几类条目</h2>
+            </div>
+            <div class="rec-tags">
+              <a href="/#picks">吃瓜仓库来源标注规范</a>
+              <a href="/#deep-read">issue 关闭率与回复时长对照</a>
+              <a href="/#guide">停更仓库识别三步法</a>
+              <a href="/#picks">README 目录树写法</a>
+              <a href="/#rank">star 增长异常榜</a>
+              <a href="/#compare">可信度分层特征表</a>
+              <a href="/#comments">条目用户评论</a>
+              <a href="/#channels">fork 备份型仓库入口</a>
+              <a href="/#update-log">本周索引变动记录</a>
+            </div>
+          </section>
+
+          <!-- 13. 时间线 -->
+          <section class="block" id="timeline" aria-labelledby="tlT">
+            <div class="block-head">
+              <span class="kicker">补充板块 · 时间线</span>
+              <h2 id="tlT">一个目录型仓库的 30 天维护轨迹</h2>
+              <p>以「tucao-archive」为样本，记录可核对的动作，用于观察维护节奏而非评价内容。</p>
+            </div>
+            <ul class="timeline">
+              <li><time datetime="2026-10-10">10月10日</time><b>建立事件目录</b><p>新建 3 个带日期前缀的文件夹，README 补上目录树。</p></li>
+              <li><time datetime="2026-10-18">10月18日</time><b>补一条原帖链接</b><p>提交信息写「补 10 月 18 日某账号原帖」，附截图时间。</p></li>
+              <li><time datetime="2026-10-27">10月27日</time><b>加 issue 必填来源字段</b><p>首周关闭 31 条无来源 issue，18 条补链后重开。</p></li>
+              <li><time datetime="2026-11-03">11月3日</time><b>修正一处转述</b><p>把「据称」改为当事人原话，并附原帖链接。</p></li>
+              <li><time datetime="2026-11-06">11月6日</time><b>进入本期精选索引</b><p>因首复 6 小时内、来源完整，来源完整度评为高。</p></li>
+            </ul>
+          </section>
+
+        </div>
+
+        <aside class="side-col" aria-label="侧栏导航与数据">
+          <div class="side-card side-nav">
+            <h2>栏内导航</h2>
+            <ul>
+              <li><a href="/#overview">领域概览</a></li>
+              <li><a href="/#picks">精选内容推荐</a></li>
+              <li><a href="/#update-log">最新更新</a></li>
+              <li><a href="/#channels">分类入口</a></li>
+              <li><a href="/#deep-read">深度解析</a></li>
+              <li><a href="/#guide">体验指南</a></li>
+              <li><a href="/#compare">可信度分层</a></li>
+              <li><a href="/#rank">star 异常榜</a></li>
+              <li><a href="/#news">相关资讯</a></li>
+              <li><a href="/#faq">常见问题</a></li>
+              <li><a href="/#comments">条目评论</a></li>
+              <li><a href="/#related">相关推荐</a></li>
+              <li><a href="/#timeline">维护轨迹</a></li>
+            </ul>
+          </div>
+          <div class="side-card side-facts">
+            <h2>索引口径</h2>
+            <dl>
+              <dt>抓取区间</dt><dd>10月9日—11月7日</dd>
+              <dt>仓库总数</dt><dd>168</dd>
+              <dt>近30天提交</dt><dd>41</dd>
+              <dt>标记过期</dt><dd>23</dd>
+              <dt>issue 关闭率中位数</dt><dd>57%</dd>
+              <dt>核验清单版本</dt><dd>v2</dd>
+            </dl>
+            <p>计数来自公开页面逐页读取，未使用第三方统计接口。同一仓库在不同时间的数字可能变化，以抓取时点为准。</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#ff5a5f"/>
+            <circle cx="33" cy="33" r="16" fill="none" stroke="#161a22" stroke-width="4"/>
+            <path d="M41 41l12 12" stroke="#161a22" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <span>51吃瓜黑料github</span>
+        </div>
+        <p>按维护节奏、来源密度与讨论质量给公开仓库分层，让检索先从可核对的信号开始。</p>
+        <div class="footer-note">示例数据说明：本页仓库名、issue 数、提交日期与评论均为演示用示例条目，除平台与公开功能名称外，不对应真实账号与真实事件。</div>
+      </div>
+      <div>
+        <h2>查索引</h2>
+        <ul>
+          <li><a href="/#picks">精选内容推荐</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#rank">star 异常榜</a></li>
+          <li><a href="/#update-log">本周变动记录</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>学核验</h2>
+        <ul>
+          <li><a href="/#deep-read">fork 比与可信度</a></li>
+          <li><a href="/#guide">5 步读懂仓库</a></li>
+          <li><a href="/#compare">可信度分层特征表</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>看讨论</h2>
+        <ul>
+          <li><a href="/#comments">条目用户评论</a></li>
+          <li><a href="/#news">平台生态动态</a></li>
+          <li><a href="/#timeline">维护轨迹样本</a></li>
+          <li><a href="/#related">相关推荐标签</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 51吃瓜黑料github 索引组 · 内容许可按示例约定，转载注明出处</span>
+      <span>页脚更新时间：2026-11-08，对应「核验清单 v2 上线」与「guachive-2025 状态改判」两项正文记录</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部" title="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+(function(){
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('mainNav');
+  var toTop = document.getElementById('toTop');
+  var searchForm = document.getElementById('searchForm');
+  var searchInput = document.getElementById('searchInput');
+  var searchStatus = document.getElementById('searchStatus');
+  var noResult = null;
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if (e.target.tagName === 'A' && window.innerWidth <= 1000) {
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.focus();
+      }
+    });
+  }
+
+  function hasResult(){
+    if (noResult) { noResult.classList.remove('on'); noResult.textContent = ''; }
+  }
+
+  function ensureNoResultBox(){
+    if (!noResult) {
+      noResult = document.createElement('p');
+      noResult.className = 'no-result';
+      var host = document.querySelector('.page-main .wrap');
+      if (host) host.insertBefore(noResult, host.firstChild);
+    }
+    return noResult;
+  }
+
+  if (searchForm && searchInput) {
+    searchForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var kw = searchInput.value.trim().toLowerCase();
+      hasResult();
+      if (!kw) {
+        if (searchStatus) { searchStatus.classList.remove('on'); searchStatus.textContent = ''; }
+        return;
+      }
+      var blocks = document.querySelectorAll('section.block');
+      var hit = null;
+      for (var i = 0; i < blocks.length; i++) {
+        var text = (blocks[i].textContent || '').toLowerCase();
+        if (text.indexOf(kw) !== -1) { hit = blocks[i]; break; }
+      }
+      var box = ensureNoResultBox();
+      if (hit) {
+        if (searchStatus) {
+          searchStatus.classList.add('on');
+          searchStatus.textContent = '已定位到匹配板块：' + (hit.querySelector('h2') ? hit.querySelector('h2').textContent : '相关内容');
+        }
+        box.classList.remove('on');
+        hit.scrollIntoView({behavior: 'smooth', block: 'start'});
+        searchInput.blur();
+      } else {
+        if (searchStatus) {
+          searchStatus.classList.add('on');
+          searchStatus.textContent = '未找到与「' + kw + '」匹配的板块';
+        }
+        box.textContent = '没有找到包含「' + searchInput.value.trim() + '」的板块。可换用：来源标注、fork 比、issue 关闭率、停更识别、README 目录。';
+        box.classList.add('on');
+      }
+    });
+  }
+
+  if (toTop) {
+    var onScroll = function(){
+      if (window.scrollY > 420) { toTop.classList.add('show'); }
+      else { toTop.classList.remove('show'); }
+    };
+    window.addEventListener('scroll', onScroll, {passive: true});
+    onScroll();
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  }
+
+  var navLinks = document.querySelectorAll('.side-nav a');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').replace('/#','');
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+
+  function updateActive(){
+    var offset = 140;
+    var current = null;
+    sections.forEach(function(item){
+      var rect = item.el.getBoundingClientRect();
+      if (rect.top - offset <= 0 && rect.bottom - offset > 0) current = item;
+    });
+    if (!current && sections.length) current = sections[0];
+    sections.forEach(function(item){
+      item.link.classList.toggle('active', item === current);
+    });
+  }
+  if (sections.length) {
+    window.addEventListener('scroll', updateActive, {passive: true});
+    updateActive();
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "51吃瓜黑料github",
+  "inLanguage": "zh-CN",
+  "description": "整理 GitHub 上爆料类资料仓库的索引页，说明仓库形态、来源标注、fork 与 star 数据怎么看，并提供核验步骤与条目评论。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "zh-CN",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "爆料仓库的 star 数能说明可靠吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "star 反映的是被看到和收藏的次数，和内容准确性的相关性很弱。样本里 46 个 fork/star 比低于 0.12 的仓库，star 中位数 214，但仅 9 个近 30 天有提交。判断可靠度更应看来源链接是否可回查、提交信息是否具体。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "黑料索引仓库里的「已核实」字样可信吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "要先看仓库有没有写出核实的标准。10 月 28 日的例子中，维护者把平台内可搜到当作核实，这与附原帖链接与时间戳是两套标准。README 只写结论、不写标准的，按转述对待，不作事实引用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "fork 数很高的仓库是不是更值得看？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不一定。fork 高可能是备份、镜像或模板复制的产物。仓库 ml-archive-09 单日被 fork 126 次，但分叉仓库没有独立提交，属于传播动作。把 fork 数和 star 数放在一起看比值，比单看任一数字更有区分度。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "停更仓库识别有哪些可核对的信号？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "三个信号：最后一次提交日期、README 声称的更新日期、releases 页是否空置。11 月 5 日改判过期的 guachive-2025，提交停在 9 月 12 日，README 却写持续更新，两者相差 55 天。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "issue 讨论区的内容和仓库正文哪个优先？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "issue 常包含对正文的纠错与补充，优先级取决于它有没有给出证据。带原帖链接、带时间的纠错优先于正文；只有观点、没有出处的，作为讨论参考，不替代正文条目。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "搬运类仓库和原创整理仓库怎么快速分开？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "看提交信息。搬运型多为单次 update 或初始化，原创整理型会写明补了哪条、来源是哪个账号。再抽 2 条内容搜索原文，若在其他仓库里几乎逐字出现，基本可判为搬运。"
+      }
+    }
+  ]
+}
+</script>
+</body>
+  </html>
